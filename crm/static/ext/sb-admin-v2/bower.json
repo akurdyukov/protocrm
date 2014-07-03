@@ -1,0 +1,40 @@
+{
+  "name": "sb-admin-v2",
+  "version": "0.1.0",
+  "authors": [
+    "Alik Kurdyukov <alik@kurdyukov.com>",
+    "IronSummitMedia"
+  ],
+  "description": "SB Admin v2 Bootstrap3 template",
+  "main": [
+      "js/sb-admin.js",
+      "js/plugins/dataTables/dataTables.bootstrap.js",
+      "css/sb-admin.css",
+      "css/plugins/dataTables/dataTables.bootstrap.css",
+      "css/plugins/social-buttons/social-buttons.css",
+      "css/plugins/timeline/timeline.css"
+  ],
+  "keywords": [
+    "bootstrap",
+    "SBAdmin"
+  ],
+  "license": "MIT",
+  "homepage": "http://startbootstrap.com/sb-admin-v2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "ext",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "DataTables": "~1.10.0",
+    "flot": "~0.8.3",
+    "bootstrap": "~3.2.0",
+    "font-awesome": "~4.1.0",
+    "flot.tooltip": "~0.7.1",
+    "metisMenu": "~1.0.1",
+    "morrisjs": "~0.5.1"
+  }
+}
