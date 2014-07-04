@@ -1,0 +1,37 @@
+{
+  "author"        : {"name": "Kevin Malakoff", "url": "https://github.com/kmalakoff"},
+  "name"          : "_knockback-navigators",
+  "description"   : "KnockbackNavigators.js provides page navigators, a pane navigator, and transition animations to help you make dynamic, single-page applications. They are platform-agnostic so you can even use them without using Knockback.js or Knockout.js!",
+  "keywords"      : ["knockback-navigators", "knockbacknavigators", "knockback", "knockbackjs", "backbone", "backbonejs", "knockout", "knockoutjs", "panes", "pages", "transitions", "navigators"],
+
+  "url"           : "http://kmalakoff.github.com/knockback-navigators/",
+  "homepage"      : "http://kmalakoff.github.com/knockback-navigators/",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/kmalakoff/knockback-navigators.git"
+  },
+
+  "scripts": {
+    "postinstall": "bake postinstall",
+    "clean": "bake clean",
+    "build": "bake build",
+    "watch": "bake watch",
+    "test": "bake test -c"
+  },
+  "devDependencies": {
+    "coffee-script": "*",
+    "easy-bake": "*",
+    "codo": ">=1.2.3",
+    "less": ">=1.3.0",
+    "stylus": ">=0.32.1",
+    "nib": ">=0.8.2"
+  },
+  "dependencies": {
+    "knockback": "0.18.x",
+    "knockout": "3.0.x",
+    "backbone": "1.1.x",
+    "underscore": "1.5.x"
+  },
+
+  "version"       : "0.1.2"
+}

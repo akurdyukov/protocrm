@@ -1,0 +1,44 @@
+{
+  "name": "knockback-navigators",
+  "version": "0.1.2",
+  "homepage": "https://github.com/kmalakoff/knockback-navigators",
+  "authors": [
+    "Kevin Malakoff <kmalakoff@gmail.com>"
+  ],
+  "description": "KnockbackNavigators.js provides page navigators, a pane navigator, and transition animations to help you make dynamic, single-page applications.",
+  "main": "knockback-pane-navigator.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "**/*.coffee",
+    "src",
+    "vendor",
+    "media",
+    "packages",
+    "examples"
+  ],
+  "keywords": [
+    "knockout",
+    "knockback",
+    "backbone",
+    "PathJS"
+  ],
+  "dependencies": {
+    "knockback": ">=0.18.0",
+    "knockout": ">=3.0.0",
+    "backbone": ">=1.1.0",
+    "underscore": ">=1.5.0"
+  },
+  "_release": "0.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.2",
+    "commit": "52f5ec6b6a9fc3d4f3b6195e1d64aaef6509bf82"
+  },
+  "_source": "/Users/alik/Development/src/knockback-navigators",
+  "_target": "~0.1.2",
+  "_originalSource": "/Users/alik/Development/src/knockback-navigators",
+  "_direct": true
+}

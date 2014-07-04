@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="{% static "ext/bootstrap/dist/css/bootstrap-theme.min.css" %}">
     <link rel="stylesheet" href="{% static "ext/font-awesome/css/font-awesome.css" %}">
     <link rel="stylesheet" href="{% static "ext/sb-admin-v2/css/sb-admin.css" %}" >
+    <link rel="stylesheet" href="{% static "ext/knockback-navigators/knockback-navigators.css" %}" >
 
 <body>
     <div id="wrapper">
 
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <nav id="navigation" class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -24,11 +25,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Backoffice CRM</a>
+                <a class="navbar-brand" href="#">Backoffice CRM</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <button data-bind="click: function() { router.navigate('contacts/new', true); }" class="btn btn-primary">New contact</button>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -49,40 +53,6 @@
                                     <i class="fa fa-twitter fa-fw"></i> 3 New Followers
                                     <span class="pull-right text-muted small">12 minutes ago</span>
                                 </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
                     </ul>
@@ -113,10 +83,10 @@
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Contacts</a>
+                            <a href="#/contacts"><i class="fa fa-dashboard fa-fw"></i> Contacts</a>
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-user fa-fw"></i> Users</a>
+                            <a href="#/users"><i class="fa fa-user fa-fw"></i> Users</a>
                         </li>
                     </ul>
                     <!-- /#side-menu -->
@@ -126,21 +96,70 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
-            <div class="row">
+        <div id="page-wrapper" class="page page-navigator">
+            <div id="dashboard-pane" class="row pane">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
+
+            <div id="users-pane" class="row pane">
                 <div class="col-lg-12">
-                    <div id="users" data-bind="foreach: users">
+                    <h1 class="page-header">Users</h1>
+                    <div id="users-table" data-bind="foreach: users">
                         <p>Name: <span data-bind="text: username"></span> <span data-bind="text: email"></span></p>
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+            <div id="contacts-pane" class="row pane">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Contacts</h1>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div id="new-contact-pane" class="row pane">
+                <form role="form" class="form-horizontal">
+                    <div class="col-lg-12">
+                        <h2>New contact</h2>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="first-name" class="col-sm-3 control-label">First name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="first-name" id="first-name" class="form-control" placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name" class="col-sm-3 control-label">Last name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="last-name" id="last-name" class="form-control" placeholder="Last name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="phone-number" class="col-sm-3 control-label">Phone number</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="phone-number" id="phone-number" class="form-control" placeholder="Phone number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-4">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <!-- /.row -->
         </div>
@@ -172,6 +191,7 @@
 
     <script src="{% static "ext/knockout/knockout.js" %}"></script>
     <script src="{% static "ext/knockback/knockback.js" %}"></script>
+    <script src="{% static "ext/knockback-navigators/knockback-page-navigator-panes.js" %}"></script>
 
     <script src="{% url 'django.views.i18n.javascript_catalog'  packages='rest2backbone'%}"></script>
 {#    <script src="{% static "js/underscore-min.js" %}"></script>#}
@@ -180,6 +200,8 @@
     <script src="{% static "js/api-forms.js" %}"></script>
 
     <!-- application scripts -->
+    <script src="{% static "app.js" %}"></script>
     <script src="{% static "contacts.js" %}"></script>
+    <script src="{% static "navigator.js" %}"></script>
 </body>
 </html>

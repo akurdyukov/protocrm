@@ -12,7 +12,7 @@ var view_model = {
   users: kb.collectionObservable(users, { view_model: kb.ViewModel })
 };
 
-ko.applyBindings(view_model, $('#users')[0]);
+ko.applyBindings(view_model, $('#users-table')[0]);
 
 
 })(jQuery);
