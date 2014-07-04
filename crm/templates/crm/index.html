@@ -134,11 +134,22 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="users" data-bind="foreach: users">
+                        <p>Name: <span data-bind="text: username"></span> <span data-bind="text: email"></span></p>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+    {{params.forms.render_all}}
 
     <!-- Scripts go here -->
 
@@ -155,5 +166,20 @@
 
     <script src="{% static "ext/metisMenu/jquery.metisMenu.js" %}"></script>
     <script src="{% static "ext/sb-admin-v2/js/sb-admin.js" %}"></script>
+
+    <script src="{% static "ext/underscore/underscore.js" %}"></script>
+    <script src="{% static "ext/backbone/backbone.js" %}"></script>
+
+    <script src="{% static "ext/knockout/knockout.js" %}"></script>
+    <script src="{% static "ext/knockback/knockback.js" %}"></script>
+
+    <script src="{% url 'django.views.i18n.javascript_catalog'  packages='rest2backbone'%}"></script>
+{#    <script src="{% static "js/underscore-min.js" %}"></script>#}
+{#    <script src="{% static "js/backbone.js" %}"></script>#}
+    <script src="{% url 'rest-api' %}"></script>
+    <script src="{% static "js/api-forms.js" %}"></script>
+
+    <!-- application scripts -->
+    <script src="{% static "contacts.js" %}"></script>
 </body>
 </html>

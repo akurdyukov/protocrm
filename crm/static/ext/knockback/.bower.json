@@ -1,0 +1,46 @@
+{
+  "name": "knockback",
+  "version": "0.18.6",
+  "main": "knockback.js",
+  "ignore": [
+    "**/.*",
+    "components",
+    "doc",
+    "media",
+    "node_modules",
+    "packages",
+    "test",
+    "vendor",
+    "bower_components",
+    "tests"
+  ],
+  "homepage": "https://github.com/kmalakoff/knockback",
+  "authors": [
+    "Kevin Malakoff <kmalakoff@gmail.com>"
+  ],
+  "description": "Knockback.js provides Knockout.js magic for Backbone.js Models and Collections",
+  "keywords": [
+    "knockback",
+    "knockbackjs",
+    "backbone",
+    "backbonejs",
+    "knockout",
+    "knockoutjs"
+  ],
+  "dependencies": {
+    "underscore": ">=1.1.7",
+    "backbone": ">=0.5.1",
+    "knockout": "knockout.js#>=1.2.1"
+  },
+  "license": "MIT",
+  "_release": "0.18.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.18.6",
+    "commit": "efb1e43ec2be3b78b1c13d118864ee4d51a5257b"
+  },
+  "_source": "git://github.com/kmalakoff/knockback.git",
+  "_target": "~0.18.6",
+  "_originalSource": "knockback",
+  "_direct": true
+}

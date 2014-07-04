@@ -26,8 +26,3 @@ class ContactViewSet(viewsets.ModelViewSet):
     """
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
-
-
-def index(request):
-    context = {}
-    return render(request, 'crm/index.html', context)
