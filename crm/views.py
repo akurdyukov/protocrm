@@ -26,3 +26,4 @@ class ContactViewSet(viewsets.ModelViewSet):
     """
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+    search_fields = ('last_name', 'first_name')

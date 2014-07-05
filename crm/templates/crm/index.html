@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{% static "ext/font-awesome/css/font-awesome.css" %}">
     <link rel="stylesheet" href="{% static "ext/sb-admin-v2/css/sb-admin.css" %}" >
     <link rel="stylesheet" href="{% static "ext/knockback-navigators/knockback-navigators.css" %}" >
+    <link rel="stylesheet" href="{% static "ext/backgrid/lib/backgrid.css" %}" >
+    <link rel="stylesheet" href="{% static "ext/backgrid-paginator/backgrid-paginator.css" %}" >
+    <link rel="stylesheet" href="{% static "ext/backgrid-filter/backgrid-filter.css" %}" >
 
 <body>
     <div id="wrapper">
@@ -107,8 +110,7 @@
             <div id="users-pane" class="row pane">
                 <div class="col-lg-12">
                     <h1 class="page-header">Users</h1>
-                    <div id="users-table" data-bind="foreach: users">
-                        <p>Name: <span data-bind="text: username"></span> <span data-bind="text: email"></span></p>
+                    <div id="users-table">
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -118,6 +120,7 @@
             <div id="contacts-pane" class="row pane">
                 <div class="col-lg-12">
                     <h1 class="page-header">Contacts</h1>
+                    <div id="contacts-table"></div>
                 </div>
             </div>
             <!-- /.row -->
@@ -188,19 +191,22 @@
 
     <script src="{% static "ext/underscore/underscore.js" %}"></script>
     <script src="{% static "ext/backbone/backbone.js" %}"></script>
+    <script src="{% static "ext/backbone.paginator/lib/backbone.paginator.js" %}"></script>
+    <script src="{% static "ext/backgrid/lib/backgrid.js" %}"></script>
+    <script src="{% static "ext/backgrid-paginator/backgrid-paginator.js" %}"></script>
+    <script src="{% static "ext/backgrid-filter/backgrid-filter.js" %}"></script>
 
     <script src="{% static "ext/knockout/knockout.js" %}"></script>
     <script src="{% static "ext/knockback/knockback.js" %}"></script>
     <script src="{% static "ext/knockback-navigators/knockback-page-navigator-panes.js" %}"></script>
 
     <script src="{% url 'django.views.i18n.javascript_catalog'  packages='rest2backbone'%}"></script>
-{#    <script src="{% static "js/underscore-min.js" %}"></script>#}
-{#    <script src="{% static "js/backbone.js" %}"></script>#}
     <script src="{% url 'rest-api' %}"></script>
     <script src="{% static "js/api-forms.js" %}"></script>
 
     <!-- application scripts -->
     <script src="{% static "app.js" %}"></script>
+    <script src="{% static "users.js" %}"></script>
     <script src="{% static "contacts.js" %}"></script>
     <script src="{% static "navigator.js" %}"></script>
 </body>

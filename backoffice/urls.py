@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, url, include
 from django.views.generic import TemplateView
+from django.contrib import admin
 from rest2backbone.forms import FormFactory
 from rest2backbone.resources import IndexedRouter
 from rest2backbone.views import restApi
 from crm import views
 
+admin.autodiscover()
 
 router = IndexedRouter(trailing_slash=False)
 router.register(r'users', views.UserViewSet)
@@ -18,5 +20,6 @@ urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
     url(r'^js-locale/(?P<packages>\S+?)/?$', 'django.views.i18n.javascript_catalog'),
     url(r'^js-restAPI/?$', restApi.as_view(), {'router': router, 'url_prefix':'/api'}, name='rest-api'),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^admin/', include(admin.site.urls))
 )
