@@ -16,6 +16,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 class ContactSerializer(serializers.HyperlinkedModelSerializer):
+    creator_name = serializers.Field(source='creator.username')
     class Meta:
         model = Contact
-        fields = ('first_name', 'last_name', 'create_time', 'modify_time', 'creator')
+        fields = ('id', 'first_name', 'last_name', 'create_time', 'modify_time', 'creator', 'creator_name')

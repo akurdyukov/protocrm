@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{% static "ext/backgrid/lib/backgrid.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-paginator/backgrid-paginator.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-filter/backgrid-filter.css" %}" >
+    <link rel="stylesheet" href="{% static "ext/backgrid-moment-cell/backgrid-moment-cell.css" %}" >
 
 <body>
     <div id="wrapper">
@@ -125,53 +126,91 @@
             </div>
             <!-- /.row -->
 
-            <div id="new-contact-pane" class="row pane">
-                <form role="form" class="form-horizontal">
-                    <div class="col-lg-12">
-                        <h2>New contact</h2>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="first-name" class="col-sm-3 control-label">First name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="first-name" id="first-name" class="form-control" placeholder="First name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="last-name" class="col-sm-3 control-label">Last name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="last-name" id="last-name" class="form-control" placeholder="Last name">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="phone-number" class="col-sm-3 control-label">Phone number</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="phone-number" id="phone-number" class="form-control" placeholder="Phone number">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-4">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
-    {{params.forms.render_all}}
+    <!-- templates -->
+    <script type="text/html" id="edit-contact-template">
+        <div id="edit-contact-pane" class="row pane">
+            <form role="form" class="form-horizontal">
+                <div class="col-lg-12">
+                    <h2>New contact</h2>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group" data-bind="showErrorsFor: first_name">
+                        <label for="first-name" class="col-sm-3 control-label">First name</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="first-name" class="form-control" placeholder="First name" data-bind="value: first_name, valueUpdate: 'input'">
+{#                            <span class="help-block">fqwe adfasdf adsf adsf</span>#}
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="showErrorsFor: last_name">
+                        <label for="last-name" class="col-sm-3 control-label">Last name</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="last-name" class="form-control" placeholder="Last name" data-bind="value: last_name, valueUpdate: 'input'">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="phone-number" class="col-sm-3 control-label">Phone number</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="phone-number" class="form-control" placeholder="Phone number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <button type="submit" class="btn btn-primary" data-bind="click: save">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /.row -->
+    </script>
+    <script type="text/html" id="show-contact-template">
+        <div id="show-contact-pane" class="row pane">
+            <form role="form" class="form-horizontal">
+                <div class="col-lg-12">
+                    <h2>Contact: <span data-bind="text: last_name"></span></h2>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <span>First name</span>
+                        <div class="col-sm-9">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name" class="col-sm-3 control-label">Last name</label>
+                        <div class="col-sm-9" data-bind="text: last_name"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="phone-number" class="col-sm-3 control-label">Phone number</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="phone-number" id="phone-number" class="form-control" placeholder="Phone number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                </div>
+            </form>
+        </div>
+        <!-- /.row -->
+    </script>
 
     <!-- Scripts go here -->
 
@@ -195,6 +234,8 @@
     <script src="{% static "ext/backgrid/lib/backgrid.js" %}"></script>
     <script src="{% static "ext/backgrid-paginator/backgrid-paginator.js" %}"></script>
     <script src="{% static "ext/backgrid-filter/backgrid-filter.js" %}"></script>
+    <script src="{% static "ext/moment/min/moment-with-langs.min.js" %}"></script>
+    <script src="{% static "ext/backgrid-moment-cell/backgrid-moment-cell.js" %}"></script>
 
     <script src="{% static "ext/knockout/knockout.js" %}"></script>
     <script src="{% static "ext/knockback/knockback.js" %}"></script>
