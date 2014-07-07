@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from current_user.models import CurrentUserField
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
-    create_time = models.DateTimeField()
-    modify_time = models.DateTimeField()
-    creator = models.ForeignKey(User)
+    create_time = models.DateTimeField(auto_now_add=True)
+    modify_time = models.DateTimeField(auto_now=True)
+    creator = CurrentUserField(auto_update=False)
 
     class Meta:
         ordering = ('create_time',)

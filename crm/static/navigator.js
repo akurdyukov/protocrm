@@ -18,7 +18,7 @@ router.route('users', null, page_navigator.dispatcher(function(){ page_navigator
 Backbone.history.start();
 
 // handle all links thru router
-$(document).on("click", "a:not([data-bypass])", function(evt) {
+$(document).on("click", "a[navigate='true']", function(evt) {
   var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
   var root = location.protocol + "//" + location.host;
 

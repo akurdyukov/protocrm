@@ -1,4 +1,4 @@
-api.{{c.name}}= api.BaseCollection.extend({
+api.{{c.name}} = RestBaseCollection.extend({
 	
 	urlRoot: '{{c.url}}'
 	

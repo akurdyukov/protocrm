@@ -82,7 +82,8 @@ var DrillDownCell = Backgrid.UriCell.extend({
             tabIndex: -1,
             href: href,
             title: this.title || formattedValue,
-            target: this.target
+            target: this.target,
+            navigate: 'true'
         }).text(formattedValue));
         this.delegateEvents();
         return this;
