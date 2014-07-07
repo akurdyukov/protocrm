@@ -6,7 +6,8 @@ class Contact(models.Model):
     last_name = models.CharField(max_length=256)
     create_time = models.DateTimeField(auto_now_add=True)
     modify_time = models.DateTimeField(auto_now=True)
-    creator = CurrentUserField(auto_update=False)
+    creator = CurrentUserField(auto_update=False, related_name='creator')
+    modifier = CurrentUserField(related_name='modifier')
 
     class Meta:
         ordering = ('create_time',)

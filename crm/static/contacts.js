@@ -199,10 +199,28 @@ var ContactViewModel = function(model) {
     this.id = kb.observable(this.model, 'id');
     this.last_name = kb.observable(this.model, 'last_name').extend({validatable: true});
     this.first_name = kb.observable(this.model, 'first_name').extend({validatable: true});
+    this.create_time = kb.observable(this.model, 'create_time');
+    this.modify_time = kb.observable(this.model, 'modify_time');
+    this.creator_name = kb.observable(this.model, 'creator_name');
+    this.modifier_name = kb.observable(this.model, 'modifier_name');
 
-    this.save = function () {
-        this.model.save();
-    }
+    this.saveAndReturn = function () {
+        this.model.save(null, {
+            success: function(model, response) {
+                contacts.add(model);
+                Backbone.history.navigate('contacts', true);
+            }
+        });
+    };
+
+    this.saveAndShow = function () {
+        this.model.save(null, {
+            success: function(model, response) {
+                contacts.add(model);
+                Backbone.history.navigate('contacts/show/' + model.id, true);
+            }
+        });
+    };
 };
 
 function isValidatable(instance) {

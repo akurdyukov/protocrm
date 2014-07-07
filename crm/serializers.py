@@ -19,8 +19,9 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 class ContactSerializer(serializers.HyperlinkedModelSerializer):
     creator_name = serializers.Field(source='creator.username')
+    modifier_name = serializers.Field(source='modifier.username')
 
     class Meta:
         model = Contact
-        fields = ('id', 'first_name', 'last_name', 'create_time', 'modify_time', 'creator', 'creator_name')
-        read_only_fields = ('id', 'create_time', 'modify_time', 'creator')
+        fields = ('id', 'first_name', 'last_name', 'create_time', 'modify_time', 'creator', 'creator_name', 'modifier', 'modifier_name')
+        read_only_fields = ('id', 'create_time', 'modify_time', 'creator', 'modifier')

@@ -27,3 +27,7 @@ $(document).on("click", "a[navigate='true']", function(evt) {
     Backbone.history.navigate(href.attr, true);
   }
 });
+$(document).on("click", "button.navigate", function(evt) {
+    evt.preventDefault();
+    Backbone.history.navigate($(this).attr("value"), true);
+});

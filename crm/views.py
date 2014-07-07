@@ -4,7 +4,6 @@ from rest_framework import viewsets
 from crm.models import Contact
 from crm.serializers import UserSerializer, GroupSerializer, ContactSerializer
 
-
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.

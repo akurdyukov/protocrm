@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title></title>
+    <title>CRM</title>
 
     <link rel="stylesheet" href="{% static "ext/bootstrap/dist/css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "ext/bootstrap/dist/css/bootstrap-theme.min.css" %}">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{% static "ext/backgrid-paginator/backgrid-paginator.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-filter/backgrid-filter.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-moment-cell/backgrid-moment-cell.css" %}" >
-
+</head>
 <body>
     <div id="wrapper">
 
@@ -35,7 +35,7 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <button data-bind="click: function() { router.navigate('contacts/new', true); }" class="btn btn-primary">New contact</button>
+                    <button value="contacts/new" class="btn btn-primary navigate">New contact</button>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -65,7 +65,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        User Name
+                        {{ user.username }}
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -74,7 +74,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{% url "logout" %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -168,7 +168,8 @@
                 <div class="col-lg-12">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
-                            <button type="submit" class="btn btn-primary" data-bind="click: save">Save</button>
+                            <button type="submit" class="btn btn-primary" data-bind="click: saveAndReturn">Save and return</button>
+                            <button type="submit" class="btn" data-bind="click: saveAndShow">Save and show</button>
                         </div>
                     </div>
                 </div>
@@ -180,29 +181,10 @@
         <div id="show-contact-pane" class="row pane">
             <form role="form" class="form-horizontal">
                 <div class="col-lg-12">
-                    <h2>Contact: <span data-bind="text: last_name"></span></h2>
-                </div>
+                    <h2><span data-bind="text: last_name"></span> <span data-bind="text: first_name"></span></h2>
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <span>First name</span>
-                        <div class="col-sm-9">
-                            <span></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="last-name" class="col-sm-3 control-label">Last name</label>
-                        <div class="col-sm-9" data-bind="text: last_name"></div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="phone-number" class="col-sm-3 control-label">Phone number</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="phone-number" id="phone-number" class="form-control" placeholder="Phone number">
-                        </div>
-                    </div>
+                    <p>Created at: <span data-bind="text: create_time"></span></p>
+                    <p>Modified at: <span data-bind="text: modify_time"></span></p>
                 </div>
 
                 <div class="col-lg-12">
@@ -215,7 +197,6 @@
     <!-- Scripts go here -->
 
     <script src="{% static "ext/jquery/dist/jquery.min.js" %}"></script>
-{#    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>#}
     <script src="{% static "ext/bootstrap/dist/js/bootstrap.min.js" %}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

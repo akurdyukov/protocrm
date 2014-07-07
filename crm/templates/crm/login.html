@@ -1,0 +1,69 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CRM</title>
+
+    <link rel="stylesheet" href="{% static "ext/bootstrap/dist/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "ext/bootstrap/dist/css/bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" href="{% static "ext/font-awesome/css/font-awesome.css" %}">
+    <link rel="stylesheet" href="{% static "ext/sb-admin-v2/css/sb-admin.css" %}" >
+</head>
+
+
+<body>
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% if form.errors %}
+                        <p class="text-danger">Your username and password didn't match. Please try again.</p>
+                        {% endif %}
+
+                        <form role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="User name" name="username" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+{#                                <div class="checkbox">#}
+{#                                    <label>#}
+{#                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me#}
+{#                                    </label>#}
+{#                                </div>#}
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                            </fieldset>
+                            <input type="hidden" name="next" value="{{ next }}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static "ext/jquery/dist/jquery.min.js" %}"></script>
+    <script src="{% static "ext/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="{% static "ext/html5shiv/dist/html5shiv.min.js" %}"></script>
+      <script src="{% static "ext/respond/dest/respond.min.js" %}"></script>
+    <![endif]-->
+
+    <script src="{% static "ext/metisMenu/jquery.metisMenu.js" %}"></script>
+    <script src="{% static "ext/sb-admin-v2/js/sb-admin.js" %}"></script>
+
+</body>
