@@ -8,10 +8,13 @@ var router = new Backbone.Router();
 router.route('', null, page_navigator.dispatcher(function(){ page_navigator.loadPage($('#dashboard-pane')[0]); }));
 router.route('contacts', null, page_navigator.dispatcher(function(){ page_navigator.loadPage($('#contacts-pane')[0]); }));
 router.route('contacts/new', null, page_navigator.dispatcher(function(){
-    page_navigator.loadPage(kb.renderTemplate('edit-contact-template', createNewContactViewModel()));
+    showNewContactEditor();
 }));
 router.route('contacts/show/:id', null, page_navigator.dispatcher(function(id){
-    page_navigator.loadPage(kb.renderTemplate('show-contact-template', createContactViewModel(id)));
+    showContactViewer(id);
+}));
+router.route('contacts/edit/:id', null, page_navigator.dispatcher(function(id){
+    showContactEditor(id);
 }));
 router.route('users', null, page_navigator.dispatcher(function(){ page_navigator.loadPage($('#users-pane')[0]); }));
 

@@ -36,9 +36,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
     'rest_framework',
     'rest2backbone',
     'current_user',
+    'multi_email_field',
     'crm'
 )
 

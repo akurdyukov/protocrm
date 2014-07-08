@@ -1,6 +1,7 @@
 from django.contrib import admin
-from crm.models import Contact, ContactEmail
+from crm.models import Contact
 
 # Register your models here.
-admin.site.register(Contact)
-admin.site.register(ContactEmail)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('last_name','first_name')
+admin.site.register(Contact, ContactAdmin)

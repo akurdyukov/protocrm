@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{% static "ext/backgrid-paginator/backgrid-paginator.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-filter/backgrid-filter.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-moment-cell/backgrid-moment-cell.css" %}" >
+    <link rel="stylesheet" href="{% static "ext/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css" %}" >
 </head>
 <body>
     <div id="wrapper">
@@ -137,7 +138,7 @@
         <div id="edit-contact-pane" class="row pane">
             <form role="form" class="form-horizontal">
                 <div class="col-lg-12">
-                    <h2>New contact</h2>
+                    <h2 data-bind="text: title"></h2>
                 </div>
 
                 <div class="col-lg-6">
@@ -145,13 +146,18 @@
                         <label for="first-name" class="col-sm-3 control-label">First name</label>
                         <div class="col-sm-9">
                             <input type="text" id="first-name" class="form-control" placeholder="First name" data-bind="value: first_name, valueUpdate: 'input'">
-{#                            <span class="help-block">fqwe adfasdf adsf adsf</span>#}
                         </div>
                     </div>
                     <div class="form-group" data-bind="showErrorsFor: last_name">
                         <label for="last-name" class="col-sm-3 control-label">Last name</label>
                         <div class="col-sm-9">
                             <input type="text" id="last-name" class="form-control" placeholder="Last name" data-bind="value: last_name, valueUpdate: 'input'">
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="showErrorsFor: emails">
+                        <label for="emails" class="col-sm-3 control-label">Emails</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="emails" class="form-control" placeholder="Emails" data-bind="tags: emails">
                         </div>
                     </div>
                 </div>
@@ -167,7 +173,7 @@
 
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-4">
+                        <div class="col-sm-offset-2 col-sm-8">
                             <button type="submit" class="btn btn-primary" data-bind="click: saveAndReturn">Save and return</button>
                             <button type="submit" class="btn" data-bind="click: saveAndShow">Save and show</button>
                         </div>
@@ -185,9 +191,11 @@
 
                     <p>Created at: <span data-bind="text: create_time"></span></p>
                     <p>Modified at: <span data-bind="text: modify_time"></span></p>
+                    <p>Emails: <span data-bind="text: emails"></span></p>
                 </div>
 
                 <div class="col-lg-12">
+                    <a class="btn btn-primary" data-bind="click: edit">Edit</a>
                 </div>
             </form>
         </div>
@@ -218,6 +226,9 @@
     <script src="{% static "ext/moment/min/moment-with-langs.min.js" %}"></script>
     <script src="{% static "ext/backgrid-moment-cell/backgrid-moment-cell.js" %}"></script>
 
+    <script src="{% static "ext/bootstrap-growl/jquery.bootstrap-growl.js" %}"></script>
+    <script src="{% static "ext/bootstrap-tokenfield/dist/bootstrap-tokenfield.js" %}"></script>
+
     <script src="{% static "ext/knockout/knockout.js" %}"></script>
     <script src="{% static "ext/knockback/knockback.js" %}"></script>
     <script src="{% static "ext/knockback-navigators/knockback-page-navigator-panes.js" %}"></script>
@@ -228,9 +239,11 @@
     <script src="{% static "js/api-forms.js" %}"></script>
 
     <!-- application scripts -->
+    <script src="{% static "common.js" %}"></script>
     <script src="{% static "app.js" %}"></script>
     <script src="{% static "users.js" %}"></script>
     <script src="{% static "contacts.js" %}"></script>
     <script src="{% static "navigator.js" %}"></script>
+    <script src="{% static "notifications.js" %}"></script>
 </body>
 </html>
