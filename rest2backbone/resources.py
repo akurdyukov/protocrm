@@ -4,21 +4,20 @@ Created on Sep 9, 2013
 @author: ivan
 '''
 
-from rest_framework import serializers, viewsets, permissions, exceptions,\
-    routers, fields, six
+from rest_framework import serializers, viewsets, fields, six
 from django.utils.translation import gettext_lazy as _
+from rest_framework import routers
 
-from django.db.models import  Q
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.response import Response
 from rest_framework.routers import Route
 from rest_framework.generics import strict_positive_int
+
 from django.http import Http404
 from django.core.paginator import InvalidPage
 from django.utils.encoding import smart_text
 from django.utils.datastructures import SortedDict
 from django.utils.html import escape
-from rest2backbone.widgets import DynamicSelect
 from django.core import validators
 
 class ModelSerializer(serializers.ModelSerializer):

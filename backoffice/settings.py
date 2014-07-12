@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'rest_framework',
+    'rest_framework_nested',
     'rest2backbone',
     'current_user',
     'multi_email_field',

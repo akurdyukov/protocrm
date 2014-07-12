@@ -1,6 +1,16 @@
 /**
  * Common code for all models and staff
  */
+var DjangoRestCollection = Backbone.Collection.extend({
+    parse: function (resp, options) {
+        if (resp && 'results' in resp && _.isArray(resp.results)) {
+            return resp.results;
+        }
+
+        return resp;
+    }
+});
+
 var DjangoRestPageableCollection = Backbone.PageableCollection.extend({
     queryParams: {
         currentPage: 'page',
@@ -177,6 +187,46 @@ ko.bindingHandlers.tags = {
             }
             // set value here
             $(element).tokenfield('setTokens', valueUnwrapped);
+        }
+    }
+};
+
+ko.bindingHandlers.date = {
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var value = valueAccessor();
+        var allBindings = allBindingsAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+        // Date formats: http://momentjs.com/docs/#/displaying/format/
+        var pattern = allBindings.format || 'DD/MM/YYYY';
+
+        var output = "-";
+        if (valueUnwrapped !== null && valueUnwrapped !== undefined && valueUnwrapped.length > 0) {
+            output = moment(valueUnwrapped).format(pattern);
+        }
+
+        if ($(element).is("input") === true) {
+            $(element).val(output);
+        } else {
+            $(element).text(output);
+        }
+    }
+};
+
+ko.bindingHandlers.dateFromNow = {
+    update: function (element, valueAccessor) {
+        var value = valueAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+        var output = "-";
+        if (valueUnwrapped !== null && valueUnwrapped !== undefined && valueUnwrapped.length > 0) {
+            output = moment(valueUnwrapped).fromNow();
+        }
+
+        if ($(element).is("input") === true) {
+            $(element).val(output);
+        } else {
+            $(element).text(output);
         }
     }
 };

@@ -3,7 +3,7 @@ __author__ = 'alik'
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from multi_email_field.serializers import MultiEmailField
-from crm.models import Contact
+from crm.models import Contact, ContactEvent
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,3 +27,9 @@ class ContactSerializer(serializers.HyperlinkedModelSerializer):
         model = Contact
         fields = ('id', 'first_name', 'last_name', 'create_time', 'modify_time', 'creator', 'creator_name', 'modifier', 'modifier_name', 'emails')
         read_only_fields = ('id', 'create_time', 'modify_time', 'creator', 'modifier')
+
+class ContactEventSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ContactEvent
+        fields = ('id', 'contact', 'event_time', 'type', 'description', 'author')
+        read_only_fields = ('id', 'event_time', 'author')

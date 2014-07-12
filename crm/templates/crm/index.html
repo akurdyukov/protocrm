@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{% static "ext/backgrid-filter/backgrid-filter.css" %}" >
     <link rel="stylesheet" href="{% static "ext/backgrid-moment-cell/backgrid-moment-cell.css" %}" >
     <link rel="stylesheet" href="{% static "ext/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css" %}" >
+
+    <link rel="stylesheet" href="{% static "common.css" %}" >
 </head>
 <body>
     <div id="wrapper">
@@ -187,15 +189,98 @@
         <div id="show-contact-pane" class="row pane">
             <form role="form" class="form-horizontal">
                 <div class="col-lg-12">
-                    <h2><span data-bind="text: last_name"></span> <span data-bind="text: first_name"></span></h2>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span data-bind="text: first_name"></span> <span data-bind="text: last_name"></span></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " align="center">
+                                    <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                                                                    class="img-circle">
+                                </div>
 
-                    <p>Created at: <span data-bind="text: create_time"></span></p>
-                    <p>Modified at: <span data-bind="text: modify_time"></span></p>
-                    <p>Emails: <span data-bind="text: emails"></span></p>
-                </div>
+                                <div class=" col-md-9 col-lg-9 ">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                        <tr>
+                                            <td>Created at:</td>
+                                            <td data-bind="dateFromNow: create_time"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Modified at:</td>
+                                            <td data-bind="dateFromNow: modify_time"></td>
+                                        </tr>
+                                         <tr>
+                                            <td>Email</td>
+                                            <td data-bind="foreach: emails"><a data-bind="attr: { href: 'mailto:' + $data }, text: $data"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone Number</td>
+                                            <td>123-4567-890(Landline)<br>555-4567-890(Mobile)</td>
+                                        </tr>
 
-                <div class="col-lg-12">
-                    <a class="btn btn-primary" data-bind="click: edit">Edit</a>
+                                        </tbody>
+                                    </table>
+
+{#                                    <a href="#" class="btn btn-primary">My Sales Performance</a>#}
+{#                                    <a href="#" class="btn btn-primary">Team Sales Performance</a>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <a data-bind="click: edit" data-original-title="Edit this contact" data-toggle="tooltip" type="button"
+                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a data-original-title="Remove this contact" data-toggle="tooltip" type="button"
+                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default widget">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-comment"></span>
+
+                            <h3 class="panel-title">Recent events</h3>
+                            <span class="label label-info" data-bind="text: eventsCount"></span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group" data-bind="foreach: events">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-2 col-md-1">
+                                            <img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/>
+                                        </div>
+                                        <div class="col-xs-10 col-md-11">
+                                            <div>
+                                                <span data-bind="text: description"></span>
+
+                                                <div class="mic-info">
+                                                    By <span data-text="text: author"></span> on <span data-bind="date: event_time"></span>
+                                                </div>
+                                            </div>
+{#                                            <div class="comment-text">#}
+{#                                                Awesome design#}
+{#                                            </div>#}
+                                            <div class="action">
+                                                <button type="button" class="btn btn-primary btn-xs" title="Edit">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-xs" title="Approved">
+                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" title="Delete">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+{#                            <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span#}
+{#                                    class="glyphicon glyphicon-refresh"></span> More</a>#}
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -219,6 +304,7 @@
 
     <script src="{% static "ext/underscore/underscore.js" %}"></script>
     <script src="{% static "ext/backbone/backbone.js" %}"></script>
+    <script src="{% static "ext/backbone-associations/backbone-associations.js" %}"></script>
     <script src="{% static "ext/backbone.paginator/lib/backbone.paginator.js" %}"></script>
     <script src="{% static "ext/backgrid/lib/backgrid.js" %}"></script>
     <script src="{% static "ext/backgrid-paginator/backgrid-paginator.js" %}"></script>

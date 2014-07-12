@@ -2,8 +2,50 @@
  * Contacts management code
  */
 
+var ContactEvent = Backbone.AssociatedModel.extend({
+    urlRoot: '/api/contactevents',
+    defaults: {
+        contact: null,
+        type: null,
+        id: null,
+        event_type: null,
+        description: null,
+        author: null
+    }
+});
+
+var ContactEventList = DjangoRestCollection.extend({
+    model: ContactEvent,
+    urlRoot: '/api/contactevents'
+});
+
+var Contact = Backbone.AssociatedModel.extend({
+    urlRoot: '/api/contacts',
+    defaults: {
+        first_name: null,
+        last_name: null,
+        create_time: null,
+        modify_time: null,
+        creator: null,
+        events: []
+    },
+    initialize: function(){
+        var self = this;
+        this.get('events').url = function() {
+            return '/api/contacts/' + self.id + '/events';
+        }
+    },
+    relations:[
+        {
+            type: Backbone.Many,
+            key: 'events',
+            collectionType: ContactEventList
+        }
+    ]
+});
+
 var ContactPageableList = DjangoRestPageableCollection.extend({
-    model: restAPI.Contact,
+    model: Contact,
     url: '/api/contacts',
     state: {
         pageSize: 10
@@ -74,6 +116,7 @@ var ContactViewModel = function(model) {
     this.creator_name = kb.observable(this.model, 'creator_name');
     this.modifier_name = kb.observable(this.model, 'modifier_name');
     this.emails = kb.observable(this.model, 'emails').extend({validatable: true});
+    this.events = kb.collectionObservable(this.model.get('events'));  //kb.observable(this.model, 'events');
 
     this.title = ko.computed(function() {
         if (this.model.isNew()) {
@@ -81,6 +124,10 @@ var ContactViewModel = function(model) {
         } else {
             return "Edit contact";
         }
+    }, this);
+
+    this.eventsCount = ko.computed(function() {
+        return this.events().length;
     }, this);
 
     this.saveAndReturn = function () {
@@ -107,11 +154,15 @@ var ContactViewModel = function(model) {
 };
 
 var showContactDetails = function(id, templateName) {
-    var model = new restAPI.Contact({id: id});
+    var model = new Contact({id: id});
     model.fetch({
         success: function(model, response, options) {
-            var viewModel = routeValidation(new ContactViewModel(model));
-            page_navigator.loadPage(kb.renderTemplate(templateName, viewModel));
+            model.get('events').fetch({
+                success: function() {
+                    var viewModel = routeValidation(new ContactViewModel(model));
+                    page_navigator.loadPage(kb.renderTemplate(templateName, viewModel));
+                }
+            });
         }
     });
 };
@@ -123,7 +174,7 @@ var showContactViewer = function(id) {
 };
 
 var showNewContactEditor = function() {
-    var model = new restAPI.Contact();
+    var model = new Contact();
 
     var viewModel = routeValidation(new ContactViewModel(model));
     page_navigator.loadPage(kb.renderTemplate('edit-contact-template', viewModel));

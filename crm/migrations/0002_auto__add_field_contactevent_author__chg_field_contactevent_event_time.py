@@ -8,37 +8,22 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Contact'
-        db.create_table(u'crm_contact', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=256)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=256)),
-            ('create_time', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modify_time', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('creator', self.gf('current_user.models.CurrentUserField')(related_name='creator', null=True, to=orm['auth.User'])),
-            ('modifier', self.gf('current_user.models.CurrentUserField')(related_name='modifier', null=True, to=orm['auth.User'])),
-            ('emails', self.gf('multi_email_field.fields.MultiEmailField')()),
-        ))
-        db.send_create_signal(u'crm', ['Contact'])
+        # Adding field 'ContactEvent.author'
+        db.add_column(u'crm_contactevent', 'author',
+                      self.gf('current_user.models.CurrentUserField')(to=orm['auth.User'], null=True),
+                      keep_default=False)
 
-        # Adding model 'ContactEvent'
-        db.create_table(u'crm_contactevent', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('contact', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crm.Contact'])),
-            ('event_time', self.gf('django.db.models.fields.DateTimeField')()),
-            ('type', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=256)),
-        ))
-        db.send_create_signal(u'crm', ['ContactEvent'])
 
+        # Changing field 'ContactEvent.event_time'
+        db.alter_column(u'crm_contactevent', 'event_time', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
 
     def backwards(self, orm):
-        # Deleting model 'Contact'
-        db.delete_table(u'crm_contact')
+        # Deleting field 'ContactEvent.author'
+        db.delete_column(u'crm_contactevent', 'author_id')
 
-        # Deleting model 'ContactEvent'
-        db.delete_table(u'crm_contactevent')
 
+        # Changing field 'ContactEvent.event_time'
+        db.alter_column(u'crm_contactevent', 'event_time', self.gf('django.db.models.fields.DateTimeField')())
 
     models = {
         u'auth.group': {
@@ -90,9 +75,10 @@ class Migration(SchemaMigration):
         },
         u'crm.contactevent': {
             'Meta': {'object_name': 'ContactEvent'},
+            'author': ('current_user.models.CurrentUserField', [], {'to': u"orm['auth.User']", 'null': 'True'}),
             'contact': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['crm.Contact']"}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
-            'event_time': ('django.db.models.fields.DateTimeField', [], {}),
+            'event_time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'type': ('django.db.models.fields.CharField', [], {'max_length': '2'})
         }
