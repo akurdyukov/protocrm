@@ -195,21 +195,20 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-3 col-lg-3 " align="center">
-                                    <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
-                                                                                    class="img-circle">
+                                <div class="col-md-2 col-lg-2" align="center">
+                                    <img alt="User Pic" data-bind="gravatar: { credential: single_email_hash, size: 100, defaultImage: 'mm', isSecure: true, rating: 'g' }" class="img-circle">
                                 </div>
 
                                 <div class=" col-md-9 col-lg-9 ">
                                     <table class="table table-user-information">
                                         <tbody>
                                         <tr>
-                                            <td>Created at:</td>
-                                            <td data-bind="dateFromNow: create_time"></td>
+                                            <td>Created:</td>
+                                            <td><span data-bind="text: creator_name"></span> (<span data-bind="dateFromNow: create_time"></span>)</td>
                                         </tr>
                                         <tr>
                                             <td>Modified at:</td>
-                                            <td data-bind="dateFromNow: modify_time"></td>
+                                            <td><span data-bind="text: modifier_name"></span> (<span data-bind="dateFromNow: modify_time"></span>)</td>
                                         </tr>
                                          <tr>
                                             <td>Email</td>
@@ -248,30 +247,13 @@
                             <ul class="list-group" data-bind="foreach: events">
                                 <li class="list-group-item">
                                     <div class="row">
-                                        <div class="col-xs-2 col-md-1">
-                                            <img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/>
-                                        </div>
-                                        <div class="col-xs-10 col-md-11">
+                                        <div class="col-xs-1 col-md-12">
                                             <div>
                                                 <span data-bind="text: description"></span>
 
                                                 <div class="mic-info">
-                                                    By <span data-text="text: author"></span> on <span data-bind="date: event_time"></span>
+                                                    By <span data-bind="text: author_name"></span> on <span data-bind="date: event_time"></span>
                                                 </div>
-                                            </div>
-{#                                            <div class="comment-text">#}
-{#                                                Awesome design#}
-{#                                            </div>#}
-                                            <div class="action">
-                                                <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                                    <span class="glyphicon glyphicon-pencil"></span>
-                                                </button>
-                                                <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                                    <span class="glyphicon glyphicon-ok"></span>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -318,6 +300,9 @@
     <script src="{% static "ext/knockout/knockout.js" %}"></script>
     <script src="{% static "ext/knockback/knockback.js" %}"></script>
     <script src="{% static "ext/knockback-navigators/knockback-page-navigator-panes.js" %}"></script>
+
+    <script src="{% static "ext/js-md5/js/md5.min.js" %}"></script>
+    <script src="{% static "knockout.gravatar.js" %}"></script>
 
     <script src="{% url 'django.views.i18n.javascript_catalog'  packages='rest2backbone'%}"></script>
     <script src="{% static "js/rest-common.js" %}"></script>

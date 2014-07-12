@@ -10,7 +10,8 @@ var ContactEvent = Backbone.AssociatedModel.extend({
         id: null,
         event_type: null,
         description: null,
-        author: null
+        author: null,
+        author_name: null
     }
 });
 
@@ -26,6 +27,8 @@ var Contact = Backbone.AssociatedModel.extend({
         last_name: null,
         create_time: null,
         modify_time: null,
+        creator_name: null,
+        modifier_name: null,
         creator: null,
         events: []
     },
@@ -128,6 +131,13 @@ var ContactViewModel = function(model) {
 
     this.eventsCount = ko.computed(function() {
         return this.events().length;
+    }, this);
+
+    this.single_email_hash = ko.computed(function() {
+        if (this.emails().length > 0) {
+            return md5(this.emails()[0]);
+        }
+        return "";
     }, this);
 
     this.saveAndReturn = function () {

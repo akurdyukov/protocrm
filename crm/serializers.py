@@ -29,7 +29,9 @@ class ContactSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ('id', 'create_time', 'modify_time', 'creator', 'modifier')
 
 class ContactEventSerializer(serializers.HyperlinkedModelSerializer):
+    author_name = serializers.Field(source='author.username')
+
     class Meta:
         model = ContactEvent
-        fields = ('id', 'contact', 'event_time', 'type', 'description', 'author')
+        fields = ('id', 'contact', 'event_time', 'type', 'description', 'author', 'author_name')
         read_only_fields = ('id', 'event_time', 'author')
